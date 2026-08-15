@@ -1,1 +1,439 @@
-<!DOCTYPE html><html style="height: 100%;"><body style="height: 100%; margin: 0;"><iframe src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_agent1_nGJFxB/webchat?__version__=2&enableFileAttachment=false&cliAgent=true" frameborder="0" style="width: 100%; height: 100%; border: 0;"></iframe></body></html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101010" />
+  <title>Voltagent AI Assistant</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #00d992;
+      --green-soft: #2fd6a1;
+      --bg: #101010;
+      --surface: #1a1a1a;
+      --text: #f2f2f2;
+      --white: #ffffff;
+      --body: #bdbdbd;
+      --muted: #8b949e;
+      --line: #3d3a39;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      overflow: hidden;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .app {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background:
+        radial-gradient(circle at 50% -20%, rgba(0, 217, 146, .08), transparent 34%),
+        var(--bg);
+    }
+
+    /* Header */
+    .header {
+      height: 72px;
+      flex: 0 0 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(16, 16, 16, .94);
+      backdrop-filter: blur(14px);
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      color: #101010;
+      background: var(--green);
+      border-radius: 10px;
+      font-size: 19px;
+      box-shadow: 0 0 20px rgba(0, 217, 146, .16);
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 13px;
+      border: 1px solid var(--line);
+      border-radius: 9999px;
+      color: var(--body);
+      background: rgba(26, 26, 26, .72);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px rgba(0, 217, 146, .75);
+    }
+
+    /* Main */
+    .main {
+      min-height: 0;
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(260px, 34%) minmax(0, 66%);
+      gap: 28px;
+      padding: 28px 32px 32px;
+    }
+
+    .intro {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 18px 10px 18px 8px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      margin-bottom: 20px;
+      color: var(--green-soft);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--green);
+    }
+
+    h1 {
+      max-width: 570px;
+      margin: 0;
+      color: var(--white);
+      font-size: clamp(38px, 4.5vw, 64px);
+      line-height: .98;
+      letter-spacing: -2.2px;
+      font-weight: 800;
+    }
+
+    h1 .accent {
+      color: var(--green);
+    }
+
+    .description {
+      max-width: 500px;
+      margin: 22px 0 0;
+      color: var(--body);
+      font-size: 17px;
+      line-height: 1.75;
+      font-weight: 500;
+    }
+
+    .tips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 28px;
+    }
+
+    .tip {
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 9999px;
+      color: var(--body);
+      background: var(--surface);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tip.green {
+      color: var(--green-soft);
+      border-color: rgba(0, 217, 146, .3);
+    }
+
+    /* Chat */
+    .chat-card {
+      min-width: 0;
+      min-height: 0;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      box-shadow:
+        0 0 0 1px rgba(0, 217, 146, .025),
+        0 0 30px rgba(0, 217, 146, .045);
+    }
+
+    .chat-top {
+      height: 54px;
+      flex: 0 0 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 17px;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+    }
+
+    .chat-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .chat-icon {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--green);
+      color: #101010;
+      font-size: 14px;
+    }
+
+    .minimize {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 5px;
+    }
+
+    .minimize:hover {
+      color: var(--green);
+    }
+
+    .iframe-wrap {
+      min-height: 0;
+      flex: 1;
+      background: var(--bg);
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: var(--bg);
+    }
+
+    /* Footer */
+    .footer {
+      height: 34px;
+      flex: 0 0 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .2px;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      body {
+        overflow: auto;
+      }
+
+      .app {
+        min-height: 100vh;
+        height: auto;
+      }
+
+      .header {
+        height: 64px;
+        flex-basis: 64px;
+        padding: 0 18px;
+      }
+
+      .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(520px, 1fr);
+        padding: 22px 14px 14px;
+        gap: 18px;
+      }
+
+      .intro {
+        justify-content: flex-start;
+        padding: 8px 5px 0;
+      }
+
+      h1 {
+        font-size: clamp(39px, 11vw, 54px);
+        letter-spacing: -1.7px;
+      }
+
+      .description {
+        margin-top: 16px;
+        font-size: 15px;
+        line-height: 1.65;
+      }
+
+      .tips {
+        margin-top: 18px;
+      }
+
+      .chat-card {
+        min-height: 520px;
+      }
+
+      .footer {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand {
+        font-size: 18px;
+      }
+
+      .brand-mark {
+        width: 31px;
+        height: 31px;
+      }
+
+      .status {
+        padding: 6px 9px;
+        font-size: 11px;
+      }
+
+      .status-text {
+        display: none;
+      }
+
+      .main {
+        padding: 18px 10px 10px;
+      }
+
+      .chat-card {
+        border-radius: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <header class="header">
+      <a class="brand" href="#" aria-label="Voltagent home">
+        <span class="brand-mark">⚡</span>
+        <span>Voltagent</span>
+      </a>
+
+      <div class="status">
+        <span class="status-dot"></span>
+        <span class="status-text">AI Assistant Online</span>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <section class="intro">
+        <div class="eyebrow">AI AGENT</div>
+
+        <h1>
+          궁금한 건<br>
+          <span class="accent">편하게</span> 물어봐요.
+        </h1>
+
+        <p class="description">
+          나만의 AI Assistant와 대화해보세요.
+          어려운 것도 쉽게, 복잡한 것도 귀엽고 편하게
+          하나씩 해결해드릴게요. ✨
+        </p>
+
+        <div class="tips">
+          <span class="tip green">● 실시간 AI</span>
+          <span class="tip">무엇이든 질문</span>
+          <span class="tip">편한 대화</span>
+        </div>
+      </section>
+
+      <section class="chat-card" aria-label="AI Assistant">
+        <div class="chat-top">
+          <div class="chat-title">
+            <span class="chat-icon">✦</span>
+            <span>AI Assistant</span>
+          </div>
+
+          <button class="minimize" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="위로 이동">
+            ···
+          </button>
+        </div>
+
+        <div class="iframe-wrap">
+          <iframe
+            src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_agent1_nGJFxB/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
+            title="Voltagent AI Assistant"
+            allow="microphone"
+            loading="eager">
+          </iframe>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      Powered by AI · Built with Voltagent design language
+    </footer>
+
+  </div>
+</body>
+</html>
