@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#101010" />
-  <title>Voltagent AI Assistant</title>
+  <title>용돈 탐정 사무소</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,6 +53,206 @@
       background:
         radial-gradient(circle at 50% -20%, rgba(0, 217, 146, .08), transparent 34%),
         var(--bg);
+    }
+
+
+    /* Kawaii detective decorations */
+    .detective-scene {
+      position: relative;
+      min-height: 190px;
+      margin-top: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 217, 146, .16);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 20% 40%, rgba(0, 217, 146, .10), transparent 26%),
+        radial-gradient(circle at 80% 70%, rgba(255, 196, 72, .08), transparent 24%),
+        #141414;
+    }
+
+    .detective {
+      position: absolute;
+      left: 20px;
+      bottom: -3px;
+      width: 118px;
+      height: 145px;
+      z-index: 2;
+    }
+
+    .detective .hat {
+      position: absolute;
+      top: 2px;
+      left: 16px;
+      width: 88px;
+      height: 34px;
+      border-radius: 48% 48% 35% 35%;
+      background: #b8783e;
+      border: 3px solid #6d4528;
+      transform: rotate(-5deg);
+    }
+
+    .detective .hat::after {
+      content: "";
+      position: absolute;
+      left: -8px;
+      bottom: -7px;
+      width: 103px;
+      height: 16px;
+      border-radius: 50%;
+      background: #9c6335;
+      border: 3px solid #6d4528;
+    }
+
+    .detective .head {
+      position: absolute;
+      top: 29px;
+      left: 25px;
+      width: 70px;
+      height: 72px;
+      border-radius: 45% 45% 48% 48%;
+      background: #f3c59f;
+      border: 3px solid #4b3326;
+    }
+
+    .detective .hair {
+      position: absolute;
+      top: 27px;
+      left: 22px;
+      width: 76px;
+      height: 40px;
+      border-radius: 48% 48% 35% 35%;
+      background: #3b2925;
+      z-index: 3;
+    }
+
+    .detective .eye {
+      position: absolute;
+      top: 62px;
+      width: 8px;
+      height: 11px;
+      border-radius: 50%;
+      background: #201b1a;
+      z-index: 4;
+    }
+
+    .detective .eye.left { left: 43px; }
+    .detective .eye.right { left: 70px; }
+
+    .detective .smile {
+      position: absolute;
+      left: 51px;
+      top: 81px;
+      width: 18px;
+      height: 9px;
+      border-bottom: 3px solid #7d493b;
+      border-radius: 50%;
+      z-index: 4;
+    }
+
+    .detective .coat {
+      position: absolute;
+      left: 20px;
+      top: 92px;
+      width: 82px;
+      height: 54px;
+      border-radius: 20px 20px 10px 10px;
+      background: #a86e3f;
+      border: 3px solid #4b3326;
+    }
+
+    .detective .magnifier {
+      position: absolute;
+      left: 77px;
+      top: 50px;
+      width: 42px;
+      height: 42px;
+      border: 7px solid var(--green);
+      border-radius: 50%;
+      background: rgba(125, 220, 255, .20);
+      box-shadow: 0 0 12px rgba(0, 217, 146, .32);
+      z-index: 6;
+    }
+
+    .detective .magnifier::after {
+      content: "";
+      position: absolute;
+      right: -19px;
+      bottom: -14px;
+      width: 25px;
+      height: 8px;
+      border-radius: 99px;
+      background: #74482c;
+      transform: rotate(48deg);
+    }
+
+    .money,
+    .math {
+      position: absolute;
+      z-index: 1;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .money {
+      color: #f4c542;
+      font-weight: 800;
+      text-shadow: 0 0 12px rgba(244, 197, 66, .22);
+    }
+
+    .money.coin {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 3px solid #d89d23;
+      border-radius: 50%;
+      background: #f4c542;
+      color: #8b5c11;
+      font-size: 16px;
+      box-shadow: inset 0 0 0 3px rgba(255,255,255,.18);
+    }
+
+    .math {
+      color: var(--green);
+      font-size: 20px;
+      font-weight: 800;
+      opacity: .82;
+    }
+
+    .m1 { top: 19px; right: 23px; }
+    .m2 { top: 88px; right: 120px; }
+    .m3 { bottom: 20px; right: 28px; }
+    .m4 { top: 42px; left: 155px; }
+    .m5 { bottom: 26px; left: 145px; }
+
+    .coin1 { top: 24px; right: 160px; transform: rotate(-12deg); }
+    .coin2 { bottom: 22px; right: 155px; transform: rotate(9deg); }
+    .coin3 { top: 82px; left: 180px; transform: rotate(14deg); }
+
+    .money-bag {
+      position: absolute;
+      right: 25px;
+      bottom: 12px;
+      font-size: 47px;
+      filter: drop-shadow(0 5px 8px rgba(0,0,0,.25));
+    }
+
+    .case-note {
+      position: absolute;
+      top: 17px;
+      left: 19px;
+      padding: 8px 12px;
+      border: 1px dashed rgba(0,217,146,.38);
+      border-radius: 9px;
+      color: var(--body);
+      background: rgba(16,16,16,.68);
+      font-size: 11px;
+      font-weight: 800;
+      transform: rotate(-2deg);
+    }
+
+    .case-note b {
+      color: var(--green);
     }
 
     /* Header */
@@ -329,6 +529,17 @@
         margin-top: 18px;
       }
 
+
+      .detective-scene {
+        min-height: 165px;
+        margin-top: 20px;
+      }
+
+      .detective {
+        transform: scale(.9);
+        transform-origin: left bottom;
+      }
+
       .chat-card {
         min-height: 520px;
       }
@@ -372,9 +583,9 @@
   <div class="app">
 
     <header class="header">
-      <a class="brand" href="#" aria-label="Voltagent home">
-        <span class="brand-mark">⚡</span>
-        <span>Voltagent</span>
+      <a class="brand" href="#" aria-label="용돈 탐정 사무소 홈">
+        <span class="brand-mark">🔎</span>
+        <span>용돈 탐정 사무소</span>
       </a>
 
       <div class="status">
@@ -389,8 +600,8 @@
         <div class="eyebrow">AI AGENT</div>
 
         <h1>
-          궁금한 건<br>
-          <span class="accent">편하게</span> 물어봐요.
+          <span class="accent">용돈 탐정 사무소</span><br>
+          사건을 해결해봐요!
         </h1>
 
         <p class="description">
@@ -403,6 +614,32 @@
           <span class="tip green">● 실시간 AI</span>
           <span class="tip">무엇이든 질문</span>
           <span class="tip">편한 대화</span>
+        </div>
+
+        <div class="detective-scene" aria-label="귀여운 탐정과 돈, 수학기호 장식">
+          <div class="case-note">CASE <b>#001</b> · 용돈의 비밀을 찾아라!</div>
+
+          <div class="math m1">÷ + ×</div>
+          <div class="math m2">Σ x²</div>
+          <div class="math m3">₩ + $</div>
+          <div class="math m4">= ?</div>
+          <div class="math m5">%</div>
+
+          <div class="money coin coin1">₩</div>
+          <div class="money coin coin2">$</div>
+          <div class="money coin coin3">₩</div>
+          <div class="money-bag">💰</div>
+
+          <div class="detective" aria-hidden="true">
+            <div class="hat"></div>
+            <div class="hair"></div>
+            <div class="head"></div>
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="smile"></div>
+            <div class="coat"></div>
+            <div class="magnifier"></div>
+          </div>
         </div>
       </section>
 
@@ -421,7 +658,7 @@
         <div class="iframe-wrap">
           <iframe
             src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_agent1_nGJFxB/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
-            title="Voltagent AI Assistant"
+            title="용돈 탐정 사무소"
             allow="microphone"
             loading="eager">
           </iframe>
@@ -431,7 +668,7 @@
     </main>
 
     <footer class="footer">
-      Powered by AI · Built with Voltagent design language
+      AI와 함께 용돈의 비밀을 찾아보세요 🔎
     </footer>
 
   </div>
